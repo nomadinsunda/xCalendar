@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+   	<declare-styleable name="CustomView">
+		<attr name="paddingLeft" format="integer" min="0" />
+		<attr name="bolderLinePosition" format="enum">
+           <enum name="upper" value="0"/>
+           <enum name="lower" value="1"/>
+           <enum name="bothend" value="2"/>
+        </attr>
+	</declare-styleable> 
+	
+   	
+    <declare-styleable name="CustomSwitchView">
+	    <attr name="textLeft" format="string"/>
+	    <attr name="textRight" format="string"/>
+	    <attr name="switchMinWidth" format="dimension" />
+	    <attr name="switchPadding" format="dimension" />	    
+	    <attr name="colorUnChecked" format="color" />	    
+	    <attr name="colorChecked" format="color" />	    
+	    <attr name="backgroundDrawable" format="reference" />	    
+	    <attr name="switchDrawable" format="dimension" />
+	    <attr name="innerPadding" format="dimension" />	   
+	    <attr name="isChecked" format="boolean" />	    
+	    	    
+	</declare-styleable>
+	
+</resources>

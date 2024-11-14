@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2011 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <dimen name="day_label_text_size">11sp</dimen>
+    <dimen name="all_day_bottom_margin">8dip</dimen>
+    <dimen name="one_day_header_height">0dip</dimen>
+    <dimen name="day_header_bottom_margin">4dip</dimen>
+    <dimen name="date_header_text_size">12sp</dimen>
+    <dimen name="hours_text_size">12sp</dimen>
+    <dimen name="allday_text_size">12sp</dimen>
+    <dimen name="ampm_text_size">10sp</dimen>
+    <dimen name="day_view_event_text_size">12sp</dimen>
+    <dimen name="week_view_event_text_size">12sp</dimen>
+    <dimen name="event_text_vertical_margin">2dp</dimen>
+    <dimen name="event_text_horizontal_margin">4dp</dimen>
+    <dimen name="event_min_height">24dip</dimen>
+    <!-- minimum size of hours column in day/week view -->
+    <dimen name="min_hours_width">24dip</dimen>
+    <!-- margins size of hours column in day/week view -->
+    <dimen name="hours_left_margin">20dip</dimen>
+    <dimen name="hours_right_margin">4dip</dimen>
+    <!-- size of day header in day and week views  -->
+    <dimen name="day_header_height">16dip</dimen>
+    <dimen name="widget_day_num_size">36sp</dimen>
+    <dimen name="widget_day_num_top_padding">-4dip</dimen>
+    <dimen name="action_bar_date_text_size">22sp</dimen>
+    <dimen name="new_event_hint_text_size">12sp</dimen>
+    <dimen name="edit_event_view_width">800dip</dimen>
+    <dimen name="edit_event_view_padding_left">80dip</dimen>
+    <dimen name="edit_event_view_padding_right">80dip</dimen>
+    <dimen name="edit_reminder_min_size">36dip</dimen>
+    <dimen name="event_info_text_size">14dip</dimen>
+    <dimen name="event_info_desc_margin_left">0dip</dimen>
+    <dimen name="event_info_desc_margin_right">0dip</dimen>
+    <dimen name="event_info_padding">0dip</dimen>
+    <dimen name="calendar_controls_width">280dip</dimen>
+    <dimen name="min_portrait_calendar_controls_width">300dip</dimen>
+    <dimen name="max_portrait_calendar_controls_width">350dip</dimen>
+    <dimen name="calendar_controls_height">300dip</dimen>
+    <dimen name="agenda_item_right_margin">4dip</dimen>
+    <dimen name="today_icon_text_size">14sp</dimen>
+    <dimen name="color_view_touch_area_increase">16dp</dimen>
+
+    <dimen name="recurrence_picker_height">340dp</dimen>
+    <dimen name="recurrence_picker_width">300dp</dimen>
+    
+    <dimen name="event_item_layout_paddingleft">12dip</dimen>
+    <dimen name="editevent_repeat_item_layout_paddingleft">48dip</dimen>
+    <dimen name="eventItemLayoutUnderLineHeight">1dp</dimen>
+    
+    <!-- ManageEventActivity ref -->
+    <dimen name="editEventItemTextPaddingLeft">0dp</dimen>
+    <dimen name="eventItemHeight">50dp</dimen>
+    <dimen name="eventViewSeperatorHeight">40dp</dimen>
+     
+    <dimen name="editEventSeperatorOutLineHeight">1dp</dimen>
+    
+    <dimen name="eventLayoutItemTextSize">18sp</dimen>
+    
+    <dimen name="eventViewCalendarSeperatorHeight">60dp</dimen>
+    <dimen name="calendarPageCalendarCategorySeperatorHeight">60dp</dimen>
+    
+    <dimen name="editEventTimerPickerMarginBottom">1dip</dimen>
+    
+    <!-- CalendarViewsActionbar ref -->
+    <dimen name="calendar_view_upper_actionbar_height">48dip</dimen>
+    <dimen name="calendar_view_lower_actionbar_height">48dip</dimen>
+    <dimen name="month_text_size">20sp</dimen>
+    
+    <dimen name="monthday_text_size">20sp</dimen>
+    <dimen name="monthday_header_bottom_margin">16dip</dimen>
+    
+    <dimen name="dateindicator_text_height">18sp</dimen>
+    
+    <!-- EventInfoActivity Actionbar ref -->
+    <dimen name="eventInfoActionbarOutLineHeight">1dip</dimen>
+    <dimen name="eventInfoViewResponseMenuHeight">48dip</dimen>
+    
+    <!-- Month Expand Events View ref -->
+    <dimen name="container_divider_width">2dp</dimen>
+    <dimen name="container_divider_top_margin">4dp</dimen>
+    <dimen name="meev_starttime_text_size">14sp</dimen>
+    <dimen name="meev_endtime_text_size">14sp</dimen>
+    <dimen name="meev_title_text_size">18sp</dimen>
+    <dimen name="meev_location_text_size">14sp</dimen>
+    
+    <!-- SearchViewsActionbar ref -->
+    <dimen name="search_view_upper_actionbar_height">48dip</dimen>
+    
+    <!-- Select Calendar View ref -->
+    <dimen name="selectcalendars_view_upper_actionbar_height">48dip</dimen>
+    <dimen name="selectCalendarViewSeperatorHeight">38dp</dimen> 
+    <dimen name="selectCalendarViewCalendarGroupIndicatorHeight">80dp</dimen>     
+    <dimen name="selectCalendarViewSeperatorOutLineHeight">1dp</dimen>
+    <dimen name="selectCalendarViewItemHeight">48dp</dimen> 
+    
+    <dimen name="selectCalendarViewLabelTextViewLeftMargin">20dip</dimen> 
+        
+    <dimen name="selectCalendarViewCommonLeftMargin">16dip</dimen>
+    <dimen name="selectCalendarViewVisibleStateMarkIconLeftMargin">@dimen/selectCalendarViewCommonLeftMargin</dimen>
+    <dimen name="selectCalendarViewCalendarColorIconLeftMargin">@dimen/selectCalendarViewCommonLeftMargin</dimen> 
+    <!-- half of selectCalendarViewCommonLeftMargin -->
+    <dimen name="selectCalendarViewCalendarNameTextViewLeftMargin">8dip</dimen>   
+    
+    <dimen name="selectCalendarViewCalendarColorNameTextLeftMargin">@dimen/selectCalendarViewCalendarColorIconLeftMargin</dimen> 
+       
+    <dimen name="selectCalendarViewVisibleStateMarkIconWidth">16dp</dimen>     
+    <dimen name="selectCalendarViewCalendarColorIconWidth">8dp</dimen> 
+    
+    <dimen name="selectCalendarViewSwitchCommonRightMargin">32dp</dimen>
+    <dimen name="selectCalendarViewExclamationMarkIconRightMargin">24dip</dimen>    
+    
+    <dimen name="selectCalendarViewTargetCalendarReminderHelpTextViewMarginTop">8dip</dimen> 
+    
+    <dimen name="selectCalendarViewCommonTextViewPaddingBottom">8dip</dimen> 
+    <dimen name="selectCalendarViewTargetCalendarColorIndicatorTextViewPaddingBottom">8dip</dimen> 
+    <dimen name="selectCalendarViewTargetCalendarReminderIndicatorTextViewPaddingBottom">8dip</dimen>
+    
+    <dimen name="selectCalendarActionBarCommonTextSize">20sp</dimen>
+    
+    <dimen name="selectCalendarViewCommonTextSize">18sp</dimen>
+    <dimen name="selectCalendarViewLabelTextSize">16sp</dimen>
+    
+    
+    <dimen name="alertactivityDBItemHeight">48dp</dimen> 
+    <!-- alertactivityDBMarginAndPadding : half of alertactivityDBItemHeight -->
+    <dimen name="alertactivityDBMarginAndPadding">24dp</dimen>
+    <!-- alertactivityDBWhenMarginTop : half of alertactivityDBMarginAndPadding -->
+    <dimen name="alertactivityDBWhenMarginTop">12dp</dimen>
+    <dimen name="alertactivityDBSmallItemHeight">32dp</dimen> 
+    <dimen name="alertactivityMainDBEventTitleTextSize">18sp</dimen>
+    <dimen name="alertactivityMainDBWhenTextSize">14sp</dimen>
+    <dimen name="alertactivityMainDBWhereTextSize">14sp</dimen>
+    
+    <dimen name="alertDialogBoxSeperatorOutLineHeight">1dp</dimen>
+    
+    <!-- Settings ref -->
+    <dimen name="settings_view_upper_actionbar_height">48dip</dimen>
+    <dimen name="settingsViewItemHeight">48dp</dimen> 
+    <dimen name="settingsTimeZoneSearchResultItemHeight">24dp</dimen> 
+    
+    <dimen name="settingsActionBarCommonTextSize">20sp</dimen>
+    <dimen name="settingsTimeZoneSearchResultItemTextSize">14sp</dimen>
+    
+    <dimen name="commonViewSeperatorHeight">38dp</dimen> 
+    <dimen name="commonViewSeperatorOutLineHeight">1dp</dimen>
+    
+    <dimen name="commonItemViewPaddingLeft">18dip</dimen>
+    <dimen name="commonItemViewPaddingRight">18dip</dimen>
+    
+    
+    
+    <dimen name="actionBarRightSideTextViewMarginRight">6dip</dimen>
+</resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+	    
+    <LinearLayout        
+		android:id="@+id/psudo_month_upperlist_of_dayview"		    
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"  
+		android:layout_marginTop="@dimen/day_header_height"  		 	    
+		android:visibility="gone"/>
+    
+    <com.intheeast.ecalendar.CalendarViewsSecondaryActionBar
+    	android:id="@+id/dayview_secondary_actionbar" 	        
+      	android:orientation="vertical"
+   		android:layout_width="match_parent"
+   		android:layout_height="wrap_content" 
+   		android:background="@color/manageevent_actionbar_background" >
+  
+   		<LinearLayout
+       		android:id="@+id/dayofweek_header"  
+       		android:orientation="vertical"
+    		android:layout_width="match_parent"
+    		android:layout_height="@dimen/day_header_height" />		
+   
+		<RelativeLayout
+     		android:id="@+id/monthday_header"		        
+  			android:layout_width="match_parent"
+  			android:layout_height="@dimen/monthday_header_height" />   
+	    	
+  		<LinearLayout
+       		android:id="@+id/pusdo_monthday_header"
+       		android:orientation="vertical"      
+    		android:layout_width="match_parent"
+    		android:layout_height="@dimen/monthday_header_height"	    
+    		android:visibility="gone"/>	    	
+  	
+  		<TextView
+       		android:id="@+id/dateindicator_header"        
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/dateindicator_header_height" 
+		    android:layout_gravity="center"	  
+		    android:textSize="@dimen/dateindicator_text_height"
+		    android:textColor="@color/secondaryActionBarDateIndicatorTextColor"
+		    android:gravity="center"			      
+		    android:visibility="gone"/>
+  	</com.intheeast.ecalendar.CalendarViewsSecondaryActionBar>
+  
+    <LinearLayout        
+		android:id="@+id/psudo_month_lowerlist_of_dayview"   		    
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"     		 	    
+		android:visibility="gone"/>  
+		
+    <RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+  		
+        <com.intheeast.ecalendar.CalendarViewsLowerActionBar
+	        android:id="@+id/dayview_psudo_lower_actionbar" 
+		    android:layout_width="match_parent"
+		    android:layout_height="48dip" 
+		    android:layout_alignParentBottom="true"
+		    android:background="@color/manageevent_actionbar_background" 
+		    android:visibility="gone" >
+    
+			<TextView
+		        android:id="@+id/dayview_psudo_lower_actionbar_today_textview"        
+		        android:gravity="center"        
+		        android:layout_centerVertical="true"
+		        android:layout_alignParentLeft="true"
+		        android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="6dip"			   
+			    android:text="@string/calendarviews_lower_actionbar_today_item"	    
+			    android:textColor="#ff0000"
+			    android:textSize="20sp" />
+			
+			<TextView
+		        android:id="@+id/dayview_psudo_lower_actionbar_calendar_textview"        
+		        android:gravity="center"
+		        android:layout_centerInParent="true"
+		        android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"			    
+			    android:text="@string/calendarviews_lower_actionbar_calendar_item"
+			    android:textColor="#ff0000"
+			    android:textSize="20sp" />
+		    
+		    <TextView
+		        android:id="@+id/dayview_psudo_lower_actionbar_inbox_textview"        
+		        android:gravity="center" 
+		        android:layout_centerVertical="true"
+		        android:layout_alignParentRight="true"		        
+		        android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginRight="6dip"
+			    android:text="@string/calendarviews_lower_actionbar_inbox_item"	    
+			    android:textColor="#ff0000"
+			    android:textSize="20sp" />
+		</com.intheeast.ecalendar.CalendarViewsLowerActionBar>
+            
+	  	<ViewSwitcher
+	      	android:id="@+id/dayview_switcher"
+	      	android:layout_width="match_parent"
+	      	android:layout_height="wrap_content" 
+	      	android:layout_above="@+id/dayview_psudo_lower_actionbar" />
+  	</RelativeLayout>
+  	
+</LinearLayout>

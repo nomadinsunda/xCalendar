@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="psudo_target_monthview_at_eventlistview_entrance" type="id"/>
+    
+    
+    <item name="selected_birthday_event_alert_time_mark_icon" type="id"/>
+    <item name="selected_event_alert_time_mark_icon" type="id"/>
+    <item name="selected_allday_event_alert_time_mark_icon" type="id"/>
+    
+    <item name="selected_default_calendar_mark_icon" type="id"/>
+    
+    <item name="selected_week_startday_mark_icon" type="id"/>
+</resources>

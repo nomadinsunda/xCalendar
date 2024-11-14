@@ -1,0 +1,28 @@
+1.psudo next month view creation
+ -만약 target month가 full month[6 weeks]라면 생성할 필요가 없다
+ 
+2.listview height adjustment
+ -onSizeChanged에서 week 종류에 따른 week height를 정의하고 있다
+  :expand event view 모드가 활성화 된다고 하더라도 week height는 변경되어서는 안된다
+
+  
+*****
+TempCalendar.setFirstDayOfWeek(mListView.getFirstDayOfWeek());  
+;Calendar의 요일의 index는 1부터 시작하고
+ Time의 요일 index는 0부터 시작한다
+ 위와 같이 설정해도 되는가?
+ -> 위와 같이 설정했는데도 문제는 발생하지 않았다
+    ;체크해야 한다
+    
+    
+else if (mExpandEventViewState == ExpandEventViewState.EventsViewEntranceAnimState) {
+        		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE) { ////이게 아니다/////////////////////////////////////////////////////////////////
+        			//mListView.setExpandEventViewMode(true);        			
+                       
+        		}
+        	}
+        	else if (mExpandEventViewState == ExpandEventViewState.EventsViewEnterance) {
+        		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
+        			
+        		}
+        	}    

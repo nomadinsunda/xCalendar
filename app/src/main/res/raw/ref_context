@@ -1,0 +1,148 @@
+EditEventView.setCalendarsCursor
+->findDefaultCalendarID
+  ->makeDefaultKCalendar
+  
+  *프로그램 최초 구동시 Default Calendar를 eCalendar로 설정[eCalendar를 생성해야 한다]
+   ->만약 user가 eCalendar를 삭제할 경우,,,
+     (iphone은 iphone calendar가 존재하지만 만약 delete를 한다면 아예 사라진다
+               그런데, 삭제하지 않고 iphone calendadr를 계속 사용할 경우, iphone calendar를 더 추가할 수 있다 : 희한한 정책이다
+               또한 삭제 가능한 calendar는 iphone calendar이다...당연한 애기이겠지만...) 
+     Default Calendar priority에 의해 Default Calendar를 설정해야 한다
+     :iphone 경우 gmail의 계정이 사용된다 그리고 iphone에서 gmail의 calendar는 삭제하지 못한다
+   ->eCalendar를 설치한 후, 제거하고 다시 재설치를 한 경우,,,
+     :eCalendar가 제거될 때 eCalendar는 제거된다는 상황을 공지받을 수 있는가?
+      ->제거 공지를 받지 못한다면 이전 eCalendar 설치 때 생성된 eCalendar local db로 인해 골치 아파지는 상황이 발생할 수 있음
+
+*Calendar들에 대한 정보를 Group 별로 따로 관리한다
+ 이때 Group에 대한 정의는 어떻게 내릴 것인가? 
+: Calendars.ACCOUNT_TYPE + " || " + Calendars.ACCOUNT_NAME + " AS " + ACCOUNT_UNIQUE_KEY, 
+     와 
+  "1) GROUP BY (" + ACCOUNT_UNIQUE_KEY
+  
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+     static final String[] CALENDARS_PROJECTION = new String[] {
+            Calendars._ID, // 0
+            Calendars.CALENDAR_DISPLAY_NAME, // 1
+            Calendars.OWNER_ACCOUNT, // 2
+            Calendars.CALENDAR_COLOR, // 3
+            Calendars.CAN_ORGANIZER_RESPOND, // 4
+            Calendars.CALENDAR_ACCESS_LEVEL, // 5
+            Calendars.VISIBLE, // 6
+            Calendars.MAX_REMINDERS, // 7
+            Calendars.ALLOWED_REMINDERS, // 8
+            Calendars.ALLOWED_ATTENDEE_TYPES, // 9
+            Calendars.ALLOWED_AVAILABILITY, // 10
+            Calendars.ACCOUNT_NAME, // 11
+            Calendars.ACCOUNT_TYPE, //12
+    };
+    
+    static final String CALENDARS_WHERE_WRITEABLE_VISIBLE = Calendars.CALENDAR_ACCESS_LEVEL + ">="
+            + Calendars.CAL_ACCESS_CONTRIBUTOR + " AND " + Calendars.VISIBLE + "=1";
+ 
+ 	mHandler.startQuery(TOKEN_CALENDARS, null, Calendars.CONTENT_URI,
+                    EditEventHelper.CALENDARS_PROJECTION,
+                    EditEventHelper.CALENDARS_WHERE_WRITEABLE_VISIBLE, null /* selection args */,
+                    null /* sort order */);
+                    
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+if (!mAutoVerticalScrollingByNewEventRect) {                  		
+                		
+                		// SELECTION_EVENT_MOVED일 경우에는 맞지 않다
+                        //int selectedTop = y - (mCellHeight / 2);   
+                        //int adjustedSelectedTop = selectedTop - mFirstCell; 
+                		int adjustedSelectedTop = mFragment.getPrvNewOrSelectedEventTop() - mFirstCell; 
+                        
+                        newEventRectTop = adjustedSelectedTop;
+                        newEventRectBottom = adjustedSelectedTop + mCellHeight;          		
+                        
+                        // moveUppermostSlowAutoScrollingThreshHold의 값으로 기존의 mCellHeight에 GRID_LINE_TOP_MARGIN을 에 추가한것은,
+                        // if (mViewStartY == 0 && newEventRectTop < (GRID_LINE_TOP_MARGIN + HOUR_GAP)) 를 위함
+                        // 단순히 mCellHeight로 설정할 경우
+                        // mViewStartY == 0인 상황에서 new event rect top이 am12 hour line을 위로 초과해 버리기 때문이다                        
+                		moveUppermostSlowAutoScrollingThreshHold = GRID_LINE_TOP_MARGIN + mCellHeight;   //moveUppermostSlowAutoScrollingThreshHold = mViewStartY + mCellHeight;                        
+                		moveLowermostSlowAutoScrollingThreshHold = mViewHeight - mFirstCell - mCellHeight; //moveLowermostSlowAutoScrollingThreshHold = mViewStartY + mGridAreaHeight - mCellHeight; 
+                                                
+                		if (newEventRectBottom <= moveUppermostSlowAutoScrollingThreshHold) {             			
+                			
+                			// 일단 slow upper most auto scrolling은 통과 하였다
+                			// fast upper most auto scrolling이 가능한 영역에 newEventRectBottom이 포함되는지 확인해보자
+                			if (mViewStartY == 0 && newEventRectTop < (GRID_LINE_TOP_MARGIN + HOUR_GAP)) {
+                        	//if (mViewStartY == 0) {
+                        		// 무작정 return 하지 말고 new event rectangle의 위치를 am 12:00에 맞춰야 하지 않을까?
+                        		if (INFO) Log.i(TAG, "onTouchEvent:return 1");
+                        		return true;
+                        	}
+                        	else {
+                        		mAutoVerticalScrollingByNewEventRect = true;
+                        		moveUppermostFastAutoScrollingThreshHold = moveUppermostSlowAutoScrollingThreshHold - (mCellHeight / 2);
+                        		if (newEventRectBottom <= moveUppermostFastAutoScrollingThreshHold) {       
+                        			mAutoVerticalScrollingType = AUTO_VERTICAL_FAST_UPPERMOST_SCROLLING_TYPE;
+                        			postOnAnimation(mAutoVerticalScrollingRunnable);
+                        		}
+                        		else {
+                        			if (INFO) Log.i(TAG, "onTouchEvent:AUTO_VERTICAL_SLOW_UPPERMOST_SCROLLING_TYPE");
+                        			mAutoVerticalScrollingType = AUTO_VERTICAL_SLOW_UPPERMOST_SCROLLING_TYPE;
+                        			postOnAnimation(mAutoVerticalScrollingRunnable);
+                        		}                        		
+                        	}                    	
+                        }                        
+                		else if (newEventRectTop >= moveLowermostSlowAutoScrollingThreshHold) {
+                        	
+                			// pm 11:45까지 cover 해야 한다
+                        	if (mViewStartY == mMaxViewStartY && newEventRectTop > (mGridAreaHeight - ((mCellHeight / 4) + GRID_LINE_BOTTOM_MARGIN))) {
+                        		if (INFO) Log.i(TAG, "onTouchEvent:return 2");
+                        		return true;
+                        	}
+                        	else {
+                        		mAutoVerticalScrollingByNewEventRect = true;
+                        		moveLowermostFastAutoScrollingThreshHold = moveLowermostSlowAutoScrollingThreshHold + (mCellHeight / 2);
+                        		if (newEventRectTop >= moveLowermostFastAutoScrollingThreshHold) {       
+                        			mAutoVerticalScrollingType = AUTO_VERTICAL_FAST_LOWERMOST_SCROLLING_TYPE;
+                        			postOnAnimation(mAutoVerticalScrollingRunnable);
+                        		}
+                        		else {
+                        			mAutoVerticalScrollingType = AUTO_VERTICAL_SLOW_LOWERMOST_SCROLLING_TYPE;
+                        			postOnAnimation(mAutoVerticalScrollingRunnable);
+                        		}                         		
+                        	}                        	
+                        }
+                	}
+                	else {
+                		synchronized(mAutoVerticalScrollingSync) {
+                			
+                            int adjustedSelectedTop = mFragment.getPrvNewOrSelectedEventTop() - mFirstCell; 
+                            
+                            newEventRectTop = adjustedSelectedTop;
+                            newEventRectBottom = adjustedSelectedTop + mCellHeight;                             
+                            
+                    		// mViewStartY는 mAutoVerticalScrollingRunnable에서 변경된다
+                    		moveUppermostSlowAutoScrollingThreshHold = GRID_LINE_TOP_MARGIN + mCellHeight;   //moveUppermostSlowAutoScrollingThreshHold = mViewStartY + mCellHeight;                        
+                    		moveLowermostSlowAutoScrollingThreshHold = mViewHeight - mFirstCell - mCellHeight; //moveLowermostSlowAutoScrollingThreshHold = mViewStartY + mGridAreaHeight - mCellHeight; 
+                    		                    		
+                    		moveUppermostFastAutoScrollingThreshHold = moveUppermostSlowAutoScrollingThreshHold - (mCellHeight / 2);	                		 
+	                		moveLowermostFastAutoScrollingThreshHold = moveLowermostSlowAutoScrollingThreshHold + (mCellHeight / 2);	                        
+	                		
+                			if (mViewStartY == 0 && newEventRectTop < (GRID_LINE_TOP_MARGIN + HOUR_GAP)) {
+                            	//if (mViewStartY == 0) {
+                            	// 무작정 return 하지 말고 new event rectangle의 위치를 am 12:00에 맞춰야 하지 않을까?
+                				mAutoVerticalScrollingByNewEventRect = false;                                    
+                	    		mAutoVerticalScrollingType = 0;
+                        		removeCallbacks(mAutoVerticalScrollingRunnable); 
+                            	if (INFO) Log.i(TAG, "onTouchEvent:return 3");
+                            	return true;
+                            }
+                			else if (mViewStartY == mMaxViewStartY && newEventRectTop > (mGridAreaHeight - ((mCellHeight / 4) + GRID_LINE_BOTTOM_MARGIN))) {
+                				mAutoVerticalScrollingByNewEventRect = false;                                    
+                	    		mAutoVerticalScrollingType = 0;
+                        		removeCallbacks(mAutoVerticalScrollingRunnable); 
+                        		if (INFO) Log.i(TAG, "onTouchEvent:return 4");
+                        		return true;
+                        	}
+	                		                      
+	                		processUnderAutoVerticalScrolling(newEventRectTop, newEventRectBottom, moveUppermostSlowAutoScrollingThreshHold, moveLowermostSlowAutoScrollingThreshHold);  	                		
+                		}                		
+                	}   	
